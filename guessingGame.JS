@@ -3,31 +3,39 @@
 // guess < secretNumber = too low
 // guess == secretnumber congratulations!
 
-let luckyNumber = Math.floor (Math.random() * 100 + 10);
+let luckyNumber = 89;
 let trials = 5;
 
-while (trials > 0){
-    const userGuess = ( prompt (`What's the LUCKY NUMBER for today?`));
-    if (isNaN(userGuess)){
-        alert (`Please put in a number!`);
-        continue;
+function guessGame (guess, trial) {
+    if (trial == 0 && userGuess != guess){
+        alert (`
+        Whoops!. 
+        LUCKY NUMBER is ${guess}. 
+        Try again tomorrow!`)
     }
-    trials--;
+    
+    while (trial > 0){
+        const userGuess = ( prompt (`What's the LUCKY NUMBER for today?`));
+        if (isNaN(userGuess)){
+            alert (`Please put in a number!`);
+            continue;
+        }
+        trial--;
+    
+       if (userGuess == guess){
+            alert (`Congratulations! You really are lucky: ${luckyNumber}`)
+            break;
+        }
+        else if (userGuess > guess){
+            alert (`Too high! you have ${trial} trials left!`)
+        }
+        else if (userGuess < guess){
+            alert (`Too Low! You have ${trial} trials left!`)
+        }
+    };
 
-    if (userGuess > luckyNumber){
-        alert (`Too high! you have ${trials} trials left!`)
-    }
-    else if (userGuess < luckyNumber){
-        alert (`Too Low! You have ${trials} trials left!`)
-    }
-    else {
-        alert (`Congratulations! You really are lucky: ${luckyNumber}`)
-    }
-};
+    
 
-if (trials == 0){
-    alert (`
-    Whoops!. 
-    LUCKY NUMBER is ${luckyNumber}. 
-    Try again tomorrow!`)
 }
+
+guessGame(luckyNumber,trials);
